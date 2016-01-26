@@ -120,12 +120,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Cell.cpp" />
+    <ClCompile Include="..\src\CellularAutomaton.cpp" />
     <ClCompile Include="..\src\CellularAutomatonManager.cpp" />
-    <ClCompile Include="..\src\TestDrive.cpp" />
+    <ClCompile Include="..\src\GenericCellularAutomaton_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Cell.hpp" />
+    <ClInclude Include="..\include\CellularAutomaton.hpp" />
     <ClInclude Include="..\include\CellularAutomatonManager.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

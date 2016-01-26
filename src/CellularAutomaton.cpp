@@ -1,7 +1,12 @@
-#include "Cell.hpp"
+#include "CellularAutomaton.hpp"
 
-Cell::Cell()
+//=============================================================================
+//	Constructor/Destructor Functions
+//=============================================================================
+
+CellularAutomaton::CellularAutomaton()
 {
+	// set algorithm, this should be different
 	std::vector<int> al;
 	al.push_back(0);
 	al.push_back(1);
@@ -23,52 +28,72 @@ Cell::Cell()
 	this->setAlgorithm(al);
 }
 
-Cell::Cell(unsigned int size)
+CellularAutomaton::CellularAutomaton(unsigned int size)
 {
 	this->setCellGroupSize(size);
 }
 
-void Cell::setCellGroupSize(unsigned int size)
-{
-	this->cellGroupSize__ = size;
-}
+//=============================================================================
+//	Get Functions
+//=============================================================================
 
-unsigned int Cell::getCellGroupSize()
+unsigned int CellularAutomaton::getCellGroupSize()
 {
 	return this->cellGroupSize__;
 }
 
-void Cell::addNewCellGroup()
+unsigned int CellularAutomaton::getPrevState(unsigned int index)
 {
-	this->cellState__.push_back(std::vector<unsigned int>(cellGroupSize__));
+	return this->cellState__[cellState__.size() - 2][index];
 }
 
-unsigned int Cell::getPrevState(unsigned int index)
-{
-	return this->cellState__[cellState__.size()-2][index];
-}
-
-unsigned int Cell::getState(unsigned int index)
+unsigned int CellularAutomaton::getState(unsigned int index)
 {
 	return this->cellState__.back()[index];
 }
 
-void Cell::setState(unsigned int index, unsigned int state)
-{
-	cellState__.back()[index] = state;
-}
-
-std::vector<int> Cell::getAlgorthm()
+std::vector<int> CellularAutomaton::getAlgorthm()
 {
 	return this->algorithm__;
 }
 
-void Cell::setAlgorithm(std::vector<int> algorithm)
+// Get the number of rows of cell states.
+unsigned int CellularAutomaton::size()
+{
+	return this->cellState__.size();
+}
+
+//=============================================================================
+//	Set Functions
+//=============================================================================
+
+void CellularAutomaton::setCellGroupSize(unsigned int size)
+{
+	this->cellGroupSize__ = size;
+}
+
+void CellularAutomaton::setState(unsigned int index, unsigned int state)
+{
+	cellState__.back()[index] = state;
+}
+
+void CellularAutomaton::setAlgorithm(std::vector<int> algorithm)
 {
 	this->algorithm__ = algorithm;
 }
 
-void Cell::printCellState()
+//=============================================================================
+//	Other Functions
+//=============================================================================
+
+// Add a new row of cells.
+void CellularAutomaton::addNewCellGroup()
+{
+	this->cellState__.push_back(std::vector<unsigned int>(cellGroupSize__));
+}
+
+// Print the current row of cells' states.
+void CellularAutomaton::printCellState()
 {
 	std::vector<unsigned int>::iterator it;
 	for (it = this->cellState__.back().begin(); it < this->cellState__.back().end(); ++it) {
@@ -77,12 +102,9 @@ void Cell::printCellState()
 	std::cout << std::endl;
 }
 
-unsigned int Cell::size()
-{
-	return this->cellState__.size();
-}
-
-bool Cell::isFinalState()
+// Check if there have been any repeated rows.
+// If so, done.
+bool CellularAutomaton::isFinalState()
 {
 	unsigned int i;
 	for (i = 0; i < this->cellState__.size()-1; ++i) {

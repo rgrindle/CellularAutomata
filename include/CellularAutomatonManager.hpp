@@ -10,14 +10,16 @@ class CellularAutomatonManager
 public:
 	CellularAutomatonManager(unsigned int numberOfCellGroups, unsigned int numberOfCells);
 
-	void printCellGroup(unsigned int index);
-	void iterateCellGroup();
+	void performCommand(int cellGroupIndex, int cellIndex, int command);
 
+	// get functions
 	unsigned int getSituationCode(int cellGroupIndex, int cellIndex);
 	int getCommand(unsigned int situation, std::vector<int> algorithm);
-	void performCommand(int cellGroupIndex, int cellIndex, int command);
 	
-	bool isDone();
+	// other functions
+	bool isDone();	// check if done
+	void iterateCellGroup();
+	void printCellGroup(unsigned int index);
 
 private:
 	std::vector<CellularAutomaton> cellGroup__;

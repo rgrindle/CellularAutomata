@@ -1,38 +1,38 @@
-#ifndef CELL_HPP
-#define CELL_HPP
+#ifndef CELLULAR_AUTOMATON_HPP
+#define CELLULAR_AUTOMATON_HPP
 
 #include <vector>
 #include <iostream>
 
-class Cell
+class CellularAutomaton
 {
 public:
-	Cell();
-	Cell(unsigned int size);
-	void addNewCellGroup();
+	CellularAutomaton();
+	CellularAutomaton(unsigned int size);
+
+	// set functions
 	void setCellGroupSize(unsigned int size);
-	unsigned int getCellGroupSize();
-
-	unsigned int getState(unsigned int index);
-	unsigned int getPrevState(unsigned int index);
 	void setState(unsigned int index, unsigned int state);
-
-	std::vector<int> getAlgorthm();
 	void setAlgorithm(std::vector<int> algorithm);
 
-	bool isFinalState();
+	// get functions
+	unsigned int getCellGroupSize();
+	unsigned int getState(unsigned int index);
+	unsigned int getPrevState(unsigned int index);
+	std::vector<int> getAlgorthm();
+	unsigned int size();	// get the number of rows of cell states
 
-	void printCellState();
-
-	unsigned int size();
+	// other functions
+	bool isFinalState();	// check for repeat states
+	void addNewCellGroup();	// push back a new row of cells
+	void printCellState();	// print the current row's cell states
 
 private:
+	std::vector<int> algorithm__;
+
 	int numberOfStates__;
 	std::vector<std::vector<unsigned int> > cellState__;
-	//std::vector<unsigned int> prevCellState__;
-	//std::vector<unsigned int> firstCellState__;
-	std::vector<int> algorithm__;
 	unsigned int cellGroupSize__;
 };
 
-#endif // CELL_HPP
+#endif // CELLULAR_AUTOMATON_HPP
