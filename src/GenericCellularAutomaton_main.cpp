@@ -1,13 +1,19 @@
-#include "CellularAutomatonManager.hpp"
+#include "CellularAutomaton.hpp"
 
 int main(int argc, char * argv[])
 {
-	CellularAutomatonManager CA(1,100);	// generate a cellular automaton with a width of 100 cells
+	if (argc != 4) {
+		std::cout << "Bad cmd line arguments. Enter as follows." << std::endl;
+		std::cout << "CellularAutomaton <numberOfCellsPerRow> <numberOfStates> <rule>" << std::endl;
+		//return 1;
+	}
 
-	// while there is no repeated automaton state keep iterating
-	while(!CA.isDone()) {
-		CA.printCellGroup(0);	// print the current states
-		CA.iterateCellGroup();	// iterate
+	CellularAutomaton CA(100,2,85);	// generate a cellular automaton with a width of 100 cells
+
+	// while there is no repeated row state keep iterating
+	while(!CA.isFinalState()) {
+		CA.iterateCellGroup();	// iterate to get next row
+		CA.printCellState();	// print the current states
 	}
 	// before finishing, row number that match the last row is printed to the screen
 	system("pause");

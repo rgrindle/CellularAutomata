@@ -8,13 +8,10 @@
 class CellularAutomatonManager
 {
 public:
-	CellularAutomatonManager(unsigned int numberOfCellGroups, unsigned int numberOfCells);
-
-	void performCommand(int cellGroupIndex, int cellIndex, int command);
+	CellularAutomatonManager(unsigned int numberOfCellGroups, unsigned int numberOfCells, unsigned int numberOfStates, int algorithm);
 
 	// get functions
-	unsigned int getSituationCode(int cellGroupIndex, int cellIndex);
-	int getCommand(unsigned int situation, std::vector<int> algorithm);
+
 	
 	// other functions
 	bool isDone();	// check if done
